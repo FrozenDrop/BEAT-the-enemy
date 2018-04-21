@@ -162,8 +162,6 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Drawing;
-
 
 namespace libZPlay
 {
@@ -199,26 +197,6 @@ namespace libZPlay
         sfAutodetect = 1000
     }
 
-
-    [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-    public struct TStreamInfo
-    {
-        [FieldOffset(0)]
-        public int SamplingRate;
-        [FieldOffset(4)]
-        public int ChannelNumber;
-        [FieldOffset(8)]
-        public bool VBR;
-        [FieldOffset(12)]
-        public int Bitrate;
-        [FieldOffset(16)]
-        public TStreamTime Length;
-        [FieldOffset(44)]
-        public string Description;
-    }
-
-
-
     [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
     public struct TWaveOutInfo
     {
@@ -237,25 +215,6 @@ namespace libZPlay
         [FieldOffset(24)]
         public string ProductName;
     }
-
-
-    [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-    public struct TWaveInInfo
-    {
-        [FieldOffset(0)]
-        public uint ManufacturerID;
-        [FieldOffset(4)]
-        public uint ProductID;
-        [FieldOffset(8)]
-        public uint DriverVersion;
-        [FieldOffset(12)]
-        public uint Formats;
-        [FieldOffset(16)]
-        public uint Channels;
-        [FieldOffset(20)]
-        public string ProductName;
-    }
-
 
     public enum TFFTWindow : int
     {
@@ -437,58 +396,6 @@ namespace libZPlay
         public TStreamHMSTime hms;
     }
 
-
-    [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-    public struct TID3Info
-    {
-        [FieldOffset(0)]
-        public string Title;
-        [FieldOffset(4)]
-        public string Artist;
-        [FieldOffset(8)]
-        public string Album;
-        [FieldOffset(12)]
-        public string Year;
-        [FieldOffset(16)]
-        public string Comment;
-        [FieldOffset(20)]
-        public string Track;
-        [FieldOffset(24)]
-        public string Genre;
-    }
-
-    public struct TID3Picture
-   {
-		public bool PicturePresent;
-		public int PictureType;
-		public string Description;
-		public Bitmap Bitmap;
-		public System.IO.MemoryStream BitStream;
-	};
-
-    public struct TID3InfoEx
-	{
-		public string Title;
-		public string Artist;
-		public string Album;
-		public string Year;
-		public string Comment;
-		public string Track;
-		public string Genre;
-		public string AlbumArtist;
-		public string Composer;
-		public string OriginalArtist;
-		public string Copyright;
-		public string URL;
-		public string Encoder;
-		public string Publisher;
-		public int BPM;
-		public TID3Picture Picture;
-	};
-
-
-
-
     public enum TBPMDetectionMethod : int
     {
         dmPeaks = 0,
@@ -576,23 +483,6 @@ namespace libZPlay
         #region libZPlay.dll interface
 
         [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-        private struct TStreamInfo_Internal
-        {
-            [FieldOffset(0)]
-            public int SamplingRate;
-            [FieldOffset(4)]
-            public int ChannelNumber;
-            [FieldOffset(8)]
-            public bool VBR;
-            [FieldOffset(12)]
-            public int Bitrate;
-            [FieldOffset(16)]
-            public TStreamTime Length;
-            [FieldOffset(44)]
-            public IntPtr Description;
-        }
-
-        [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
         private struct TWaveOutInfo_Internal
         {
             [FieldOffset(0)]
@@ -610,101 +500,6 @@ namespace libZPlay
             [FieldOffset(24)]
             public IntPtr ProductName;
         }
-
-
-        [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-        private struct TWaveInInfo_Internal
-        {
-            [FieldOffset(0)]
-            public uint ManufacturerID;
-            [FieldOffset(4)]
-            public uint ProductID;
-            [FieldOffset(8)]
-            public uint DriverVersion;
-            [FieldOffset(12)]
-            public uint Formats;
-            [FieldOffset(16)]
-            public uint Channels;
-            [FieldOffset(20)]
-            public IntPtr ProductName;
-        }
-
-
-        [StructLayout(LayoutKind.Explicit, CharSet = CharSet.Unicode)]
-        private struct TID3Info_Internal
-        {
-            [FieldOffset(0)]
-            public IntPtr Title;
-            [FieldOffset(4)]
-            public IntPtr Artist;
-            [FieldOffset(8)]
-            public IntPtr Album;
-            [FieldOffset(12)]
-            public IntPtr Year;
-            [FieldOffset(16)]
-            public IntPtr Comment;
-            [FieldOffset(20)]
-            public IntPtr Track;
-            [FieldOffset(24)]
-            public IntPtr Genre;
-        }
-
-        [StructLayout(LayoutKind.Explicit, CharSet=CharSet.Unicode)]
-        private struct TID3InfoEx_Internal
-        {
-			[FieldOffset(0)]
-            public IntPtr Title;
-			[FieldOffset(4)]
-            public IntPtr Artist;
-			[FieldOffset(8)]
-            public IntPtr Album;
-			[FieldOffset(12)]
-            public IntPtr Year;
-			[FieldOffset(16)]
-            public IntPtr Comment;
-			[FieldOffset(20)]
-            public IntPtr Track;
-			[FieldOffset(24)]
-            public IntPtr Genre;
-			[FieldOffset(28)]
-            public IntPtr AlbumArtist;
-			[FieldOffset(32)]
-            public IntPtr Composer;
-			[FieldOffset(36)]
-            public IntPtr OriginalArtist;
-			[FieldOffset(40)]
-            public IntPtr Copyright;
-			[FieldOffset(44)]
-            public IntPtr URL;
-			[FieldOffset(48)]
-            public IntPtr Encoder;
-			[FieldOffset(52)]
-            public IntPtr Publisher;
-			[FieldOffset(56)]
-            public int BPM;
-			[FieldOffset(60)]
-            public int PicturePresent;
-			[FieldOffset(64)]
-            public int CanDrawPicture;
-			[FieldOffset(68)]
-            public IntPtr MIMEType;
-			[FieldOffset(72)]
-            public int PictureType;
-			[FieldOffset(76)]
-            public IntPtr Description;
-			[FieldOffset(80)]
-            public IntPtr PictureData;
-			[FieldOffset(84)]
-            public int PictureDataSize;
-			[FieldOffset(88)]
-            public IntPtr hBitmap;
-			[FieldOffset(92)]
-            public int Width;
-			[FieldOffset(96)]
-            public int Height;
-			[FieldOffset(356)]
-            public IntPtr reserved;
-		};
 
 
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_CreateZPlay", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
@@ -888,23 +683,6 @@ namespace libZPlay
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_GetFFTGraphParam", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         private extern static int zplay_GetFFTGraphParam(uint objptr, int nParamID);
 
-
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_LoadID3W", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
-        private extern static int zplay_LoadID3W(uint objptr, int nId3Version, ref TID3Info_Internal pId3Info);
-
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_LoadID3ExW", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
-        private extern static int zplay_LoadID3ExW(uint objptr, ref TID3InfoEx_Internal pId3Info, int fDecodeEmbededPicture);
-
-
-
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_LoadFileID3W", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Unicode, SetLastError = true)]
-        private extern static int zplay_LoadFileID3W(uint objptr, [MarshalAs(UnmanagedType.LPWStr)] string pchFileName, int nFormat, int nId3Version, ref TID3Info_Internal pId3Info);
-
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_LoadFileID3ExW", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Unicode, SetLastError = true)]
-        private extern static int zplay_LoadFileID3ExW(uint objptr, [MarshalAs(UnmanagedType.LPWStr)] string pchFileName, int nFormat, ref TID3InfoEx_Internal pId3Info, int fDecodeEmbededPicture);
-        
-
-
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_DetectBPM", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         private extern static int zplay_DetectBPM(uint objptr, uint nMethod);
 
@@ -931,16 +709,9 @@ namespace libZPlay
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_EnumerateWaveIn", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         private extern static int zplay_EnumerateWaveIn(uint objptr);
 
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_GetWaveInInfoW", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
-        private extern static int zplay_GetWaveInInfoW(uint objptr, uint nIndex, ref TWaveInInfo_Internal pWaveOutInfo);
-
 
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_SetWaveInDevice", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
         private extern static int zplay_SetWaveInDevice(uint objptr, uint nIndex);
-
-
-        [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_GetStreamInfoW", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Ansi, SetLastError = true)]
-        private extern static void zplay_GetStreamInfoW(uint objptr, ref TStreamInfo_Internal pInfo);
 
         [System.Runtime.InteropServices.DllImport("libzplay.dll", EntryPoint = "zplay_SetWaveOutFileW", ExactSpelling = true, CharSet = System.Runtime.InteropServices.CharSet.Unicode, SetLastError = true)]
         private extern static int zplay_SetWaveOutFileW(uint objptr, [MarshalAs(UnmanagedType.LPWStr)] string sFileName, int nFormat, int fOutputToSoundcard);
@@ -1280,176 +1051,6 @@ namespace libZPlay
 
         #endregion
 
-        #region ID3 Info
-
-        public bool LoadID3(TID3Version Id3Version, ref TID3Info Info)
-        {
-            TID3Info_Internal tmp = new TID3Info_Internal();
-            if (zplay_LoadID3W(objptr, System.Convert.ToInt32((int)(Id3Version)), ref tmp) == 1)
-            {
-                Info.Album = Marshal.PtrToStringUni(tmp.Album);
-                Info.Artist = Marshal.PtrToStringUni(tmp.Artist);
-                Info.Comment = Marshal.PtrToStringUni(tmp.Comment);
-                Info.Genre = Marshal.PtrToStringUni(tmp.Genre);
-                Info.Title = Marshal.PtrToStringUni(tmp.Title);
-                Info.Track = Marshal.PtrToStringUni(tmp.Track);
-                Info.Year = Marshal.PtrToStringUni(tmp.Year);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-
-        public bool LoadID3Ex(ref TID3InfoEx Info, bool fDecodePicture)
-        {
-            TID3InfoEx_Internal tmp = new TID3InfoEx_Internal();
-        
-            if (zplay_LoadID3ExW(objptr, ref tmp, 0) == 1)
-            {
-                Info.Album = Marshal.PtrToStringUni(tmp.Album);
-                Info.Artist = Marshal.PtrToStringUni(tmp.Artist);
-                Info.Comment = Marshal.PtrToStringUni(tmp.Comment);
-                Info.Genre = Marshal.PtrToStringUni(tmp.Genre);
-                Info.Title = Marshal.PtrToStringUni(tmp.Title);
-                Info.Track = Marshal.PtrToStringUni(tmp.Track);
-                Info.Year = Marshal.PtrToStringUni(tmp.Year);
-
-                Info.AlbumArtist = Marshal.PtrToStringUni(tmp.AlbumArtist);
-                Info.Composer = Marshal.PtrToStringUni(tmp.Composer);
-                Info.OriginalArtist = Marshal.PtrToStringUni(tmp.OriginalArtist);
-                Info.Copyright = Marshal.PtrToStringUni(tmp.Copyright);
-                Info.Encoder = Marshal.PtrToStringUni(tmp.Encoder);
-                Info.Publisher = Marshal.PtrToStringUni(tmp.Publisher);
-                Info.BPM = tmp.BPM;
-
-
-                Info.Picture.PicturePresent = false;
-                if (fDecodePicture)
-                {
-                    try
-                    {
-                        if (tmp.PicturePresent == 1)
-                        {
-                            byte[] stream_data = new byte[System.Convert.ToInt32(tmp.PictureDataSize) + 1];
-                            Marshal.Copy(tmp.PictureData, stream_data, 0, tmp.PictureDataSize);
-                            Info.Picture.BitStream = new System.IO.MemoryStream();
-                            Info.Picture.BitStream.Write(stream_data, 0, tmp.PictureDataSize);
-                            Info.Picture.Bitmap = new Bitmap(Info.Picture.BitStream);
-                            Info.Picture.PictureType = tmp.PictureType;
-                            Info.Picture.Description = Marshal.PtrToStringUni(tmp.Description);
-                            Info.Picture.PicturePresent = true;
-                        }
-                        else
-                        {
-                            Info.Picture.Bitmap = new Bitmap(1, 1);
-                        }
-                        return true;
-
-                    }
-                    catch
-                    {
-                        Info.Picture.PicturePresent = false;
-                    }
-                }
-
-
-            }
-            else
-            {
-                return false;
-            }
-
-            return false;
-        }
-
-
-        public bool LoadFileID3(string FileName, TStreamFormat Format, TID3Version Id3Version, ref TID3Info Info)
-        {
-            TID3Info_Internal tmp = new TID3Info_Internal();
-            if (zplay_LoadFileID3W(objptr, FileName, System.Convert.ToInt32(Format), System.Convert.ToInt32((int)(Id3Version)), ref tmp) == 1)
-            {
-                Info.Album = Marshal.PtrToStringUni(tmp.Album);
-                Info.Artist = Marshal.PtrToStringUni(tmp.Artist);
-                Info.Comment = Marshal.PtrToStringUni(tmp.Comment);
-                Info.Genre = Marshal.PtrToStringUni(tmp.Genre);
-                Info.Title = Marshal.PtrToStringUni(tmp.Title);
-                Info.Track = Marshal.PtrToStringUni(tmp.Track);
-                Info.Year = Marshal.PtrToStringUni(tmp.Year);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public bool LoadFileID3Ex(string FileName, TStreamFormat Format, ref TID3InfoEx Info, bool fDecodePicture)
-        {
-            TID3InfoEx_Internal tmp = new TID3InfoEx_Internal();
-
-            if (zplay_LoadFileID3ExW(objptr, FileName, System.Convert.ToInt32(Format), ref tmp, 0) == 1)
-            {
-                Info.Album = Marshal.PtrToStringUni(tmp.Album);
-                Info.Artist = Marshal.PtrToStringUni(tmp.Artist);
-                Info.Comment = Marshal.PtrToStringUni(tmp.Comment);
-                Info.Genre = Marshal.PtrToStringUni(tmp.Genre);
-                Info.Title = Marshal.PtrToStringUni(tmp.Title);
-                Info.Track = Marshal.PtrToStringUni(tmp.Track);
-                Info.Year = Marshal.PtrToStringUni(tmp.Year);
-
-                Info.AlbumArtist = Marshal.PtrToStringUni(tmp.AlbumArtist);
-                Info.Composer = Marshal.PtrToStringUni(tmp.Composer);
-                Info.OriginalArtist = Marshal.PtrToStringUni(tmp.OriginalArtist);
-                Info.Copyright = Marshal.PtrToStringUni(tmp.Copyright);
-                Info.Encoder = Marshal.PtrToStringUni(tmp.Encoder);
-                Info.Publisher = Marshal.PtrToStringUni(tmp.Publisher);
-                Info.BPM = tmp.BPM;
-
-
-                Info.Picture.PicturePresent = false;
-                if (fDecodePicture)
-                {
-                    try
-                    {
-                        if (tmp.PicturePresent == 1)
-                        {
-                            byte[] stream_data = new byte[System.Convert.ToInt32(tmp.PictureDataSize) + 1];
-                            Marshal.Copy(tmp.PictureData, stream_data, 0, tmp.PictureDataSize);
-                            Info.Picture.BitStream = new System.IO.MemoryStream();
-                            Info.Picture.BitStream.Write(stream_data, 0, tmp.PictureDataSize);
-                            Info.Picture.Bitmap = new Bitmap(Info.Picture.BitStream);
-                            Info.Picture.PictureType = tmp.PictureType;
-                            Info.Picture.Description = Marshal.PtrToStringUni(tmp.Description);
-                            Info.Picture.PicturePresent = true;
-                        }
-                        else
-                        {
-                            Info.Picture.Bitmap = new Bitmap(1, 1);
-                        }
-                        return true;
-
-                    }
-                    catch
-                    {
-                        Info.Picture.PicturePresent = false;
-                    }
-                }
-
-            }
-            else
-            {
-                return false;
-            }
-
-            return false;
-        }
-
-
-        #endregion
-
         #region Callback
         public bool SetCallbackFunc(TCallbackFunc CallbackFunc, TCallbackMessage Messages, int UserData)
         {
@@ -1554,18 +1155,6 @@ namespace libZPlay
 
         #region Status and Info
 
-        public void GetStreamInfo(ref TStreamInfo info)
-        {
-            TStreamInfo_Internal tmp = new TStreamInfo_Internal();
-            zplay_GetStreamInfoW(objptr, ref tmp);
-            info.Bitrate = tmp.Bitrate;
-            info.ChannelNumber = tmp.ChannelNumber;
-            info.SamplingRate = tmp.SamplingRate;
-            info.VBR = tmp.VBR;
-            info.Length = tmp.Length;
-            info.Description = Marshal.PtrToStringUni(tmp.Description);
-        }
-
         public void GetStatus(ref TStreamStatus status)
         {
             zplay_GetStatus(objptr, ref status);
@@ -1610,22 +1199,6 @@ namespace libZPlay
         public int EnumerateWaveIn()
         {
             return zplay_EnumerateWaveIn(objptr);
-        }
-
-        public bool GetWaveInInfo(uint Index, ref TWaveInInfo Info)
-        {
-            TWaveInInfo_Internal tmp = new TWaveInInfo_Internal();
-            if (zplay_GetWaveInInfoW(objptr, Index, ref tmp) == 0)
-            {
-                return false;
-            }
-            Info.Channels = tmp.Channels;
-            Info.DriverVersion = tmp.DriverVersion;
-            Info.Formats = tmp.Formats;
-            Info.ManufacturerID = tmp.ManufacturerID;
-            Info.ProductID = tmp.ProductID;
-            Info.ProductName = Marshal.PtrToStringUni(tmp.ProductName);
-            return true;
         }
 
         public bool SetWaveInDevice(uint Index)
