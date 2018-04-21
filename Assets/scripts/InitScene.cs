@@ -6,7 +6,7 @@ public class InitScene : MonoBehaviour {
 
     const int ROWS = 10;
     const int COLS = 10;
-    const float fieldSize = 0.8F;
+    const float fieldSize = 1F;
 
     GameObject sceneCamObj;
 
@@ -21,7 +21,7 @@ public class InitScene : MonoBehaviour {
             for (int j = 0; j < COLS; j++) {
                 cubes[i][j] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 cubes[i][j].transform.localScale = new Vector3(fieldSize, fieldSize);
-                cubes[i][j].transform.position = new Vector3(-6.6F + i * fieldSize, 3.6F - j * fieldSize);
+                cubes[i][j].transform.position = new Vector3(-8.39F + i * fieldSize, 4.5F - j * fieldSize);
             }
         }
 
