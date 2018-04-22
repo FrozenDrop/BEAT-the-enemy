@@ -27,39 +27,6 @@ public class InitScene : MonoBehaviour {
         
     }
 
-    Vector2 setEndPoint(int startZ)
-    {
-        Vector2 v = new Vector2();
-        int zone;
-
-        do {
-            zone = Random.Range(0, 3);
-        } while (zone == startZ);
-        
-        int pos;
-
-        switch (zone)
-        {
-            case 0: //top
-                pos = Random.Range(0, ROWS - 1);
-                v.Set(pos, 0);
-                break;
-            case 1: //Right
-                pos = Random.Range(0, COLS - 1);
-                v.Set(COLS - 1, pos);
-                break;
-            case 2: //Down
-                pos = Random.Range(0, ROWS - 1);
-                v.Set(pos, ROWS - 1);
-                break;
-            case 3: //top
-                pos = Random.Range(0, COLS - 1);
-                v.Set(0, pos);
-                break;
-        }
-
-        return v;
-    }
 
     // Update is called once per frame
     void Update () {
