@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class InitScene : MonoBehaviour {
 
-    const int ROWS = 10;
-    const int COLS = 10;
     const float fieldSize = 1F;
 
-    GameObject sceneCamObj;
+    [SerializeField]
+    public List<GameObject> tiles;   
 
     // Use this for initialization
     void Start () {
         Screen.SetResolution(1280, 720, true);
-        GameObject[][] cubes = new GameObject[ROWS][];
-
-        for (int i = 0; i < ROWS; i++) { cubes[i] = new GameObject[COLS]; }
-
-        for (int i = 0; i < ROWS; i++) {
-            for (int j = 0; j < COLS; j++) {
-                cubes[i][j] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                cubes[i][j].transform.localScale = new Vector3(fieldSize, fieldSize);
-                cubes[i][j].transform.position = new Vector3(-8.39F + i * fieldSize, 4.5F - j * fieldSize);
+                
+        for (int y = 0, _y = Table.rows; y < _y; y++)
+        {
+            for (int x = 0, _x = Table.cols; x < _x; x++)
+            {
+                if (tiles.Count > 0)
+                {
+                    GameObject o = tiles[0];
+                    Instantiate<GameObject>(o, new Vector3(x, y), Quaternion.identity);
+                }   
             }
         }
-
-        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        //cube.transform.position = new Vector3(0, 0, 0);
-
         
     }
 	
